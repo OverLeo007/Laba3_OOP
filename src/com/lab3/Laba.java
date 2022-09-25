@@ -5,6 +5,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+/**
+ * Класс для запуска программы
+ */
 public class Laba {
 
   public static void main(String[] args) {
@@ -16,6 +20,9 @@ public class Laba {
 
 }
 
+/**
+ * Интерфейс, реализующий нумерацию вариантов выбора для switch()
+ */
 interface menuEnum {
 
   int ADD_PERSON = 1,
@@ -30,6 +37,9 @@ interface menuEnum {
 
 }
 
+/**
+ * Основной класс интерфейса
+ */
 class UI implements menuEnum {
 
   /**
@@ -47,6 +57,9 @@ class UI implements menuEnum {
    */
   private final ArrayList<Person> persons = new ArrayList<>();
 
+  /**
+   * Метод основного меню работы
+   */
   public void menu() {
 
     int choice;
@@ -77,6 +90,10 @@ class UI implements menuEnum {
 
   }
 
+
+  /**
+   * Метод меню добавления человека
+   */
   private void personAdder() {
     int choice;
 
@@ -105,9 +122,13 @@ class UI implements menuEnum {
     } while (choice != EXIT);
   }
 
-
+  /**
+   * Метод добавления человека, выбранного типа
+   *
+   * @param human_type выбранный тип человека
+   */
   private void adderHandler(int human_type) {
-    String data_answer = null;
+    String data_answer;
 
     while (true) {
       out.println("Добавлять с входными данными (y/n)?");
@@ -150,10 +171,20 @@ class UI implements menuEnum {
     }
   }
 
+  /**
+   * Метод добавления человека
+   *
+   * @param person добавляемый человек
+   */
   private void addPerson(Person person) {
     this.persons.add(person);
   }
 
+  /**
+   * Метод добавления студента
+   *
+   * @param person исходный человек с заполненными полями
+   */
   private void addStudent(Person person) {
     if (person.getYearsOld() == -1) {
       this.persons.add(new Student());
@@ -185,6 +216,11 @@ class UI implements menuEnum {
     this.persons.add(newStudent);
   }
 
+  /**
+   * Метод добавления преподавателя
+   *
+   * @param person исходный человек с заполненными полями
+   */
   private void addTeacher(Person person) {
     if (person.getYearsOld() == -1) {
       this.persons.add(new Teacher());
@@ -216,6 +252,11 @@ class UI implements menuEnum {
     this.persons.add(newTeacher);
   }
 
+  /**
+   * Метод добавления сотрудника
+   *
+   * @param person исходный человек с заполненными полями
+   */
   private void addEmployee(Person person) {
     if (person.getYearsOld() == -1) {
       this.persons.add(new Teacher());
@@ -247,6 +288,9 @@ class UI implements menuEnum {
     this.persons.add(newEmployee);
   }
 
+  /**
+   * Метод удаления человека из списка
+   */
   private void deletePerson() {
     out.println("Введите индекс человека в списке:");
     int index = inp.getInt();
@@ -258,6 +302,9 @@ class UI implements menuEnum {
     }
   }
 
+  /**
+   * Метод вывода всех людей в списке
+   */
   private void printPersons() {
     if (persons.isEmpty()) {
       out.println("Ни одного человека не добавлено");
@@ -271,6 +318,9 @@ class UI implements menuEnum {
     }
   }
 
+  /**
+   * Метод сравнения двух человек из списка
+   */
   private void comparator() {
     int index1 = 1, index2 = 1;
     boolean isIndex1 = false, isIndex2 = false;
@@ -303,5 +353,4 @@ class UI implements menuEnum {
           index2);
     }
   }
-
 }

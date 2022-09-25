@@ -2,55 +2,105 @@ package com.lab3;
 
 import java.util.Objects;
 
-public class Teacher extends Person{
+/**
+ * Класс преподавателя
+ */
+public class Teacher extends Person {
 
+  /**
+   * Количество групп у преподавателя
+   */
   private int groupCount;
+  /**
+   * Кафедра преподавателя
+   */
   private String department;
 
-  public Teacher(int years_old, String name, int groupCount, String department) {
-    super(years_old, name);
-    if (groupCount > 0 & department != null){
+  /**
+   * Конструктор Teacher с параметрами
+   *
+   * @param name       имя преподавателя
+   * @param yearsOld   возраст преподавателя
+   * @param department кафедра преподавателя
+   * @param groupCount количество групп у преподавателя
+   */
+  public Teacher(int yearsOld, String name, int groupCount, String department) {
+    super(yearsOld, name);
+    if (groupCount > 0 & department != null) {
       this.department = department;
       this.groupCount = groupCount;
     }
   }
 
-  public Teacher(){
+  /**
+   * Конструктор Teacher без параметров
+   */
+  public Teacher() {
     super();
     this.groupCount = -1;
     this.department = "Unknown";
   }
 
+  /**
+   * Конструктор Teacher от Person
+   *
+   * @param person исходный человек с заполненными полями
+   */
   public Teacher(Person person) {
     super(person.getYearsOld(), person.getName());
   }
 
+  /**
+   * Геттер кафедры преподавателя
+   *
+   * @return кафедра преподавателя
+   */
   public String getDepartment() {
     return department;
   }
 
+  /**
+   * Геттер количества групп у преподавателя
+   *
+   * @return количество групп у преподавателя
+   */
   public int getGroupCount() {
     return groupCount;
   }
 
+  /**
+   * Сеттер кафедры преподавателя
+   *
+   * @param department кафедра преподавателя
+   * @return true при корректной кафедре false при некорректной
+   */
   public boolean setDepartment(String department) {
-    if (department != null){
+    if (department != null) {
       this.department = department;
       return true;
     }
     return false;
   }
 
+  /**
+   * Сеттер количества групп у преподавателя
+   *
+   * @param groupCount количество групп у преподавателя
+   * @return true при корректном количестве false при некорректном
+   */
   public boolean setGroupCount(int groupCount) {
-    if (groupCount > 0){
+    if (groupCount > 0) {
       this.groupCount = groupCount;
       return true;
     }
     return false;
   }
 
+  /**
+   * Метод строкового представления Teacher
+   */
   @Override
-  public String toString(){
+  public String toString() {
     return String.format("""
             Преподаватель %s
             %d лет
@@ -63,6 +113,9 @@ public class Teacher extends Person{
         this.getGroupCount());
   }
 
+  /**
+   * Метод сравнения Teacher с Object
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -79,6 +132,9 @@ public class Teacher extends Person{
         && this.getDepartment().equals(teacher.getDepartment());
   }
 
+  /**
+   * Метод получения хэш-кода объекта
+   */
   @Override
   public int hashCode() {
     return Objects.hash(super.hashCode(), this.department, this.groupCount);
