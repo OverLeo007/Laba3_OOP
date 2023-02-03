@@ -17,6 +17,19 @@ public class Student extends Person {
   private String faculty;
 
   /**
+   * Границы для курса
+   */
+  private final int MAX_COURSE = 5, MIN_COURSE = 0;
+
+  /**
+   * Конструктор Student без параметров
+   */
+  public Student() {
+    this.course = -1;
+    this.faculty = "Unknown";
+  }
+
+  /**
    * Конструктор Student с параметрами
    *
    * @param years_old возраст студента
@@ -26,9 +39,12 @@ public class Student extends Person {
    */
   public Student(int years_old, String name, int course, String faculty) {
     super(years_old, name);
-    if (course > 0 & course <= 5 & faculty != null) {
+    if (course > MIN_COURSE & course <= MAX_COURSE & faculty != null) {
       this.course = course;
       this.faculty = faculty;
+    } else {
+      this.course = -1;
+      this.faculty = "Unknown";
     }
   }
 
@@ -41,34 +57,25 @@ public class Student extends Person {
   }
 
   /**
-   * Конструктор Student без параметров
-   */
-  public Student() {
-    super();
-    this.course = -1;
-    this.faculty = "Unknown";
-  }
-
-  /**
-   * Геттер факультета студента
+   * Метод получения значения факультета студента
    *
-   * @return факультет студента
+   * @return private String faculty - wфакультет студента
    */
   public String getFaculty() {
     return faculty;
   }
 
   /**
-   * Геттер номера курса студента
+   * Метод получения значения номера курса студента
    *
-   * @return номер курса студента
+   * @return private int course - номер курса студента
    */
   public int getCourse() {
     return course;
   }
 
   /**
-   * Сеттер факультета студента
+   * Метод установки значения факультета студента
    *
    * @param faculty факультет студента
    * @return true при корректном факультете false при некорректном
@@ -82,13 +89,13 @@ public class Student extends Person {
   }
 
   /**
-   * Сеттер номера курса студента
+   * Метод установки значения номера курса студента
    *
    * @param course номер курса студента
    * @return true при корректном номере false при некорректном
    */
   public boolean setCourse(int course) {
-    if (course > 0 & course <= 5) {
+    if (course > MIN_COURSE & course <= MAX_COURSE) {
       this.course = course;
       return true;
     }
@@ -104,8 +111,7 @@ public class Student extends Person {
             Студент %s
             %d лет
             Факультет: %s
-            %d курс обучения
-            ************************""",
+            %d курс обучения""",
         super.getName(),
         super.getYearsOld(),
         this.getFaculty(),
@@ -114,15 +120,12 @@ public class Student extends Person {
 
   /**
    * Метод сравнения Employee с Student
+   *
+   * @param o сравниваемый Object
+   * @return true при эквивалентности объектов false при их различности
    */
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
     if (!super.equals(o)) {
       return false;
     }

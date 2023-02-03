@@ -13,23 +13,13 @@ public class Person {
    */
   private int yearsOld;
   /**
+   * Границы для возраста
+   */
+  private final int MAX_YEARS = 150, MIN_YEARS = 0;
+  /**
    * Имя человека
    */
   private String name;
-
-
-  /**
-   * Конструктор Person с параметрами
-   *
-   * @param name     имя человека
-   * @param yearsOld возраст человека
-   */
-  public Person(int yearsOld, String name) {
-    if (yearsOld >= 0 & yearsOld < 150 & name != null) {
-      this.yearsOld = yearsOld;
-      this.name = name;
-    }
-  }
 
   /**
    * Конструктор Person без параметров
@@ -40,25 +30,45 @@ public class Person {
   }
 
   /**
-   * Геттер имени человека
+   * Конструктор Person с параметрами
    *
-   * @return Имя человека
+   * @param name     имя человека
+   * @param yearsOld возраст человека
+   */
+  public Person(int yearsOld, String name) {
+
+
+    if (yearsOld >= MIN_YEARS & yearsOld < MAX_YEARS & name != null) {
+      this.yearsOld = yearsOld;
+      this.name = name;
+    } else {
+      this.yearsOld = -1;
+      this.name = "Unnamed";
+    }
+  }
+
+
+
+  /**
+   * Метод получения значения имени человека
+   *
+   * @return private String name - имя человека
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Геттер возраста человека
+   * Метод получения значения возраста человека
    *
-   * @return возраст человека
+   * @return private int yearsOld - возраст человека
    */
   public int getYearsOld() {
     return yearsOld;
   }
 
   /**
-   * Сеттер имени человека
+   * Метод установки значения имени человека
    *
    * @param name имя человека
    * @return true при корректном имени false при некорректном
@@ -69,17 +79,16 @@ public class Person {
       return true;
     }
     return false;
-
   }
 
   /**
-   * Сеттер возраста человека
+   * Метод установки значения возраста человека
    *
    * @param years_old возраст человека
    * @return true при корректном возрасте false при некорректном
    */
   public boolean setYearsOld(int years_old) {
-    if (years_old >= 0 & years_old < 150) {
+    if (years_old >= MIN_YEARS & years_old < MAX_YEARS) {
       this.yearsOld = years_old;
       return true;
     }
@@ -94,12 +103,14 @@ public class Person {
   public String toString() {
     return String.format("""
         Человек %s
-        %d лет
-        ************************""", this.name, this.yearsOld);
+        %d лет""", this.name, this.yearsOld);
   }
 
   /**
    * Метод сравнения Person с Object
+   *
+   * @param o сравниваемый Object
+   * @return true при эквивалентности объектов false при их различности
    */
   @Override
   public boolean equals(Object o) {

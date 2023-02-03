@@ -17,6 +17,14 @@ public class Employee extends Person {
   private String jobTitle;
 
   /**
+   * Конструктор Employee без параметров
+   */
+  public Employee() {
+    this.lengthOfWork = -1;
+    this.jobTitle = "Unknown";
+  }
+
+  /**
    * Конструктор Emploee с параметрами
    *
    * @param name         имя сотрудника
@@ -29,47 +37,41 @@ public class Employee extends Person {
     if (lengthOfWork > 0 & lengthOfWork < yearsOld & jobTitle != null) {
       this.lengthOfWork = lengthOfWork;
       this.jobTitle = jobTitle;
+    } else {
+      this.lengthOfWork = -1;
+      this.jobTitle = "Unknown";
     }
   }
 
-  /**
-   * Конструктор Employee без параметров
-   */
-  public Employee() {
-    super();
-    this.lengthOfWork = -1;
-    this.jobTitle = "Unknown";
-  }
+//  /**
+//   * Конструктор Employee от Person
+//   *
+//   * @param person исходный человек с заполненными полями
+//   */
+//  public Employee(Person person) {
+//    super(person.getYearsOld(), person.getName());
+//  }
 
   /**
-   * Конструктор Employee от Person
+   * Метод получения значения должности сотрудника
    *
-   * @param person исходный человек с заполненными полями
-   */
-  public Employee(Person person) {
-    super(person.getYearsOld(), person.getName());
-  }
-
-  /**
-   * Геттер должности сотрудника
-   *
-   * @return должность сотрудника
+   * @return private String jobTitle - должность сотрудника
    */
   public String getJobTitle() {
     return jobTitle;
   }
 
   /**
-   * Геттер стажа работы сотрудника
+   * Метод получения значения стажа работы сотрудника
    *
-   * @return стаж работы сотрудника
+   * @return private int lengthOfWork - стаж работы сотрудника
    */
   public int getLengthOfWork() {
     return lengthOfWork;
   }
 
   /**
-   * Сеттер должности сотрудника
+   * Метод установки значения должности сотрудника
    *
    * @param jobTitle должность сотрудника
    * @return true при корректной должности false при некорректной
@@ -83,7 +85,7 @@ public class Employee extends Person {
   }
 
   /**
-   * Сеттер стажа работы сотрудника
+   * Метод установки значения стажа работы сотрудника
    *
    * @param lengthOfWork стаж работы сотрудника
    * @return true при корректном стаже false при некорректном
@@ -105,8 +107,7 @@ public class Employee extends Person {
             Сотрудник %s
             %d лет
             Должность: %s
-            %d лет стажа
-            ************************""",
+            %d лет стажа""",
         super.getName(),
         super.getYearsOld(),
         this.getJobTitle(),
@@ -115,15 +116,12 @@ public class Employee extends Person {
 
   /**
    * Метод сравнения Employee с Object
+   *
+   * @param o сравниваемый Object
+   * @return true при эквивалентности объектов false при их различности
    */
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
     if (!super.equals(o)) {
       return false;
     }
