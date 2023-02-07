@@ -32,7 +32,8 @@ public class Teacher extends Employee {
      * @param department кафедра преподавателя
      * @param groupCount количество групп у преподавателя
      */
-    public Teacher(int yearsOld, String name, int lengthOfWork, String jobTitle, int groupCount, String department) {
+    public Teacher(int yearsOld, String name, int lengthOfWork, String jobTitle, int groupCount,
+        String department) {
         super(yearsOld, name, lengthOfWork, jobTitle);
         if (groupCount > 0 & department != null) {
             this.department = department;
